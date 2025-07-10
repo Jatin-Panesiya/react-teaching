@@ -1,34 +1,36 @@
-import Header from '../../components/header/Header'
+import { useState } from "react";
 
 const Home = () => {
-    const products = [
-        { id: 1, name: 'Product 1', price: 100 },
-        { id: 2, name: 'Product 2', price: 200 },
-        { id: 3, name: 'Product 3', price: 300 },
-    ];
+    const [count, setCount] = useState(1);
+    const [cars, setCars] = useState(["Mustang", "Alto"])
+    const [profile, setProfile] = useState({ name: "viral" })
 
-    function handleClick(value) {
-        console.log(value);
+    function test() {
+        setProfile({ ...profile, surname: "check" });
+
+        setProfile(prev => {
+            return { ...prev, age: 10 }
+        })
     }
 
+    console.log(profile, 'bare')
     return (
         <div>
-            <Header />
-            HOME
+            <button onClick={test}>Increase</button>
+            <div>{count}</div>
             {
-                products.map((ele) => (
-                    <div key={ele.id}>
-                        <div>{ele.name}</div>
-                    </div>
+                cars.map((ele) => (
+                    <div key={ele}>{ele}</div>
                 ))
             }
 
-            <button onClick={() => handleClick("hello")}>Console</button>
-            <button onClick={handleClick}>Console</button>
-
-            <input type="text" onChange={(e) => handleClick(e.target.value)} />
-            <input type="text" onChange={handleClick} />
-        </div>
+            <button onClick={() => {
+                setProfile((prevVal) => {
+                    return { ...prevVal, surname: "" }
+                })
+            }}>add surname</button>
+            <button onClick={() => { setCount(count - 1) }}>Decrease</button>
+        </div >
     )
 }
 

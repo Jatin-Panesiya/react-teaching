@@ -1,17 +1,1 @@
-.header {
-    background-color: red;
-}
-
-.primary-btn {
-    background-color: rgb(155, 231, 208);
-    color: black;
-    padding: 10px 20px;
-    border-radius: 5px;
-}
-
-.warning-container {
-    background-color: lightyellow;
-    font-weight: 500;
-    color: black;
-    padding: 50px;
-}
+@import "tailwindcss";
