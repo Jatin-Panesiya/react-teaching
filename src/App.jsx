@@ -1,6 +1,10 @@
 import { Route, Routes } from "react-router"
 import Home from "./pages/Home/Home"
 import About from "./pages/About/About"
+import Todo from "./components/Todo/Todo"
+import { useState } from "react"
+import UserContext from "./context/userContext"
+import ProductContext from "./context/productsContext"
 
 export const Menus = [
   {
@@ -16,16 +20,21 @@ export const Menus = [
 ]
 
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+
   return (
-    <Routes>
-      {
-        Menus.map((ele) => (
-          <Route path={ele.path} element={ele.element} />
-        ))
-      }
-      {/* <Route path="*" element={<NotFoundPage />} /> */}
-      {/* <Route path="*" element={<Navigate to="/" />} /> */}
-    </Routes>
+    <ProductContext.Provider value={{ cartItems, setCartItems }}>
+      <UserContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+        <Routes>
+          {
+            Menus.map((ele) => (
+              <Route path={ele.path} element={ele.element} />
+            ))
+          }
+        </Routes>
+      </UserContext.Provider>
+    </ProductContext.Provider>
   )
 }
 
